@@ -59,12 +59,12 @@ function readConfig() {
 }
 
 
-// Task to clean the dist folder (delete old files)
-async function cleanDist() {
+// Task to clean the docs folder (delete old files)
+async function cleandocs() {
   try {
-    await fs.emptyDir('dist'); // Empty the dist folder
+    await fs.emptyDir('docs'); // Empty the docs folder
   } catch (err) {
-    console.error('Error cleaning dist folder:', err);
+    console.error('Error cleaning docs folder:', err);
   }
 }
 
@@ -75,10 +75,10 @@ function scripts() {
     .pipe(concat(dynamicJsFile))
     .pipe(injectString.prepend(`const API_BASE_URL = '${API_BASE_URL}';\n const BASE_URL = '${BASE_URL}';\n const BUILD_VERSION = '${BUILD_VERSION}';\n`))
     .pipe(uglify())
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('docs'));
 }
 
-// Task for copying the index.html file to the dist folder and updating the script tag
+// Task for copying the index.html file to the docs folder and updating the script tag
 function copyHtml() {
 
   return gulp.src('src/*.html')
@@ -90,14 +90,14 @@ function copyHtml() {
     //   path.basename = 'index';
     //   path.extname = '.html';
     // }))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('docs'));
 }
 
 // Task for minifying CSS files and combining them into a single file
 function minifyCss() {
-  // Create the dist/css folder if it doesn't exist
-  if (!fs.existsSync('dist/css')) {
-    fs.mkdirSync('dist/css', { recursive: true });
+  // Create the docs/css folder if it doesn't exist
+  if (!fs.existsSync('docs/css')) {
+    fs.mkdirSync('docs/css', { recursive: true });
   }
 
   return gulp.src([
@@ -106,19 +106,19 @@ function minifyCss() {
   ])
     .pipe(concat(dynamicCssFile)) // Combine all CSS files into a single file
     .pipe(cleanCSS()) // Minify CSS
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('docs'));
 }
 
-// Task for copying components to the dist folder
+// Task for copying components to the docs folder
 function copyComponents() {
   return gulp.src('src/components/**/*')
-    .pipe(gulp.dest('dist/components'));
+    .pipe(gulp.dest('docs/components'));
 }
 
-// Task for copying images to the dist folder
+// Task for copying images to the docs folder
 function copyImages() {
   return gulp.src('src/images/**/*')
-    .pipe(gulp.dest('dist/images'));
+    .pipe(gulp.dest('docs/images'));
 }
 
 function generateHtaccess(done) {
@@ -144,7 +144,7 @@ function generateHtaccess(done) {
     RewriteRule ^(.*)$ 404.html [L]
   `;
 
-  fs.writeFile('./dist/.htaccess', htaccessContent, (err) => {
+  fs.writeFile('./docs/.htaccess', htaccessContent, (err) => {
     if (err) {
       console.error('Error generating .htaccess file:', err);
     } else {
@@ -156,7 +156,7 @@ function generateHtaccess(done) {
 
 
 // Default task to run both commands one by one
-gulp.task('default', gulp.series( cleanDist,generateHtaccess, readConfig, scripts, minifyCss, copyHtml, copyComponents, copyImages));
+gulp.task('default', gulp.series( cleandocs,generateHtaccess, readConfig, scripts, minifyCss, copyHtml, copyComponents, copyImages));
 
 
 // Task to create the folder and files

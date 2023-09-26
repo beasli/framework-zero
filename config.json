@@ -1,21 +1,21 @@
 {
    "prod": 
    {
-        "API_BASE_URL": "https://admin.firsttoy.co/api",
-        "BASE_URL": "https://firsttoy.co/"     
+        "API_BASE_URL": "https://beasli.github.io/framework-zero/api",
+        "BASE_URL": "https://beasli.github.io/framework-zero/"     
     },
 
     "stage": 
     {
-         "API_BASE_URL": "https://admin-firsttoy.myclientdemo.us/api",
-         "BASE_URL": "https://first-toy.myclientdemo.us/"
+         "API_BASE_URL": "https://beasli.github.io/framework-zero/api",
+         "BASE_URL": "https://beasli.github.io/framework-zero/"
  
          
      },
 
    "local":
    { 
-        "API_BASE_URL": "https://admin-firsttoy.myclientdemo.us/api",
+        "API_BASE_URL": "https://beasli.github.io/framework-zero/api",
         "BASE_URL": "http://127.0.0.1:5500/dist/"
     }
 }

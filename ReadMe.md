@@ -1,3 +1,7 @@
+<div style="text-align: center; padding: 20px;">
+    <img src="https://beasli.github.io/framework-zero/images/logo.png" alt="Framework Zero Logo">
+</div>
+
 <div style="padding-inline: 25%;">
 <!-- Introduction -->
 <h2 style="margin-block: 20px;">Introduction</h2>
